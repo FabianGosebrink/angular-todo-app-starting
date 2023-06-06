@@ -1,19 +1,30 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+
+const routes: Routes = [
+  {
+    path: 'todo',
+    loadChildren: () => import('./todo/todo.module').then((m) => m.TodoModule),
+  },
+  {
+    path: 'about',
+    loadChildren: () =>
+      import('./about/about.module').then((m) => m.AboutModule),
+  },
+  { path: '', redirectTo: '/todo', pathMatch: 'full' },
+];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule, HttpClientModule, ReactiveFormsModule
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
