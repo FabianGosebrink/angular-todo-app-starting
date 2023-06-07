@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-todo-form',
@@ -10,8 +9,6 @@ import { DataService } from '../../services/data.service';
 export class TodoFormComponent {
   @Output() todoAdded = new EventEmitter<string>();
 
-  constructor(private dataService: DataService) {}
-
   form = new FormGroup({
     todoValue: new FormControl('', Validators.required),
   });
@@ -20,7 +17,5 @@ export class TodoFormComponent {
     const value = this.form.value.todoValue;
 
     this.todoAdded.emit(value);
-
-    this.form.value;
   }
 }

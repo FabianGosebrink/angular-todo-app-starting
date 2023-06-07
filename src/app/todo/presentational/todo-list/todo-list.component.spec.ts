@@ -8,7 +8,7 @@ describe('TodoListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TodoListComponent]
+      declarations: [TodoListComponent],
     });
     fixture = TestBed.createComponent(TodoListComponent);
     component = fixture.componentInstance;
@@ -17,5 +17,44 @@ describe('TodoListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('deleteTodo', () => {
+    it('should not call emit method when user hits cancel', () => {
+      // arrange
+      const emitSpy = spyOn(component.todoDeleted, 'emit');
+      spyOn(window, 'confirm').and.returnValue(false);
+
+      // act
+      component.deleteTodo(null);
+
+      // assert
+      expect(emitSpy).not.toHaveBeenCalled();
+    });
+
+    it('should call emit method when user hits okay', () => {
+      // arrange
+      const emitSpy = spyOn(component.todoDeleted, 'emit');
+      spyOn(window, 'confirm').and.returnValue(true);
+
+      // act
+      component.deleteTodo(null);
+
+      // assert
+      expect(emitSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('markAsDone', () => {
+    it('should not call emit method when user hits cancel', () => {
+      // arrange
+      const emitSpy = spyOn(component.todoMarkedAsDone, 'emit');
+
+      // act
+      component.markAsDone(null);
+
+      // assert
+      expect(emitSpy).toHaveBeenCalled();
+    });
   });
 });

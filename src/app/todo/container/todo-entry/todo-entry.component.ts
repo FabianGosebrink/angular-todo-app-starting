@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { environment } from '../../../../environments/environment';
 import { Todo } from '../../models/todo';
-import { DataService } from '../../services/data.service';
+import { TodoDataService } from '../../services/todo-data.service';
 
 @Component({
   selector: 'app-todo-entry',
@@ -12,44 +10,34 @@ import { DataService } from '../../services/data.service';
 export class TodoEntryComponent {
   items: Todo[] = [];
 
-  constructor(
-    private readonly http: HttpClient,
-    private dataService: DataService
-  ) {}
+  constructor(private readonly todoDataService: TodoDataService) {}
 
   ngOnInit(): void {
-    this.http.get<Todo[]>(`${environment.apiUrl}todos/`).subscribe((items) => {
+    this.todoDataService.getItems().subscribe((items) => {
       this.setSortedItems(items);
     });
-
-    this.dataService.source$.subscribe(console.log);
   }
 
   addTodo(value: string): void {
-    this.http
-      .post<Todo>(`${environment.apiUrl}todos/`, { value })
-      .subscribe((addedItem) => {
-        const mergedItems = [...this.items, addedItem];
-        this.setSortedItems(mergedItems);
-      });
+    this.todoDataService.addTodo(value).subscribe((addedItem) => {
+      const mergedItems = [...this.items, addedItem];
+      this.setSortedItems(mergedItems);
+    });
   }
 
   deleteTodo(item: Todo): void {
-    this.http.delete(`${environment.apiUrl}todos/${item.id}`).subscribe(() => {
+    this.todoDataService.deleteTodo(item).subscribe(() => {
       const filteredItems = this.items.filter((x) => x.id !== item.id);
       this.setSortedItems(filteredItems);
     });
   }
 
   markAsDone(item: Todo): void {
-    item.done = !item.done;
-    this.http
-      .put<Todo>(`${environment.apiUrl}todos/${item.id}`, item)
-      .subscribe((updatedItem) => {
-        const filteredItems = this.items.filter((x) => x.id !== updatedItem.id);
-        const mergedItems = [...filteredItems, updatedItem];
-        this.setSortedItems(mergedItems);
-      });
+    this.todoDataService.markAsDone(item).subscribe((updatedItem) => {
+      const filteredItems = this.items.filter((x) => x.id !== updatedItem.id);
+      const mergedItems = [...filteredItems, updatedItem];
+      this.setSortedItems(mergedItems);
+    });
   }
 
   private setSortedItems(items: Todo[]): void {
