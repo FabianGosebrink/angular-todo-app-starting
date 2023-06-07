@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Todo } from '../../models/todo';
 import { TodoActions } from '../../store/todo.actions';
-import { items, loading } from '../../store/todo.selectors';
+import * as TodoSelectors from '../../store/todo.selectors';
 
 @Component({
   selector: 'app-todo-entry',
@@ -17,8 +17,8 @@ export class TodoEntryComponent {
   constructor(private readonly store: Store) {}
 
   ngOnInit(): void {
-    this.items$ = this.store.select(items);
-    this.loading$ = this.store.select(loading);
+    this.items$ = this.store.select(TodoSelectors.items);
+    this.loading$ = this.store.select(TodoSelectors.loading);
 
     this.store.dispatch(TodoActions.getAllTodos());
   }
