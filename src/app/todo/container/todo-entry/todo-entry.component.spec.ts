@@ -2,13 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs';
-import { mockClass } from '../../../../testing/auto-mock';
+import { provideMock } from '../../../../testing/auto-mock';
 import { TodoDataService } from '../../services/todo-data.service';
 import { TodoEntryComponent } from './todo-entry.component';
-
-function provideMock(service: any) {
-  return { provide: TodoDataService, useClass: mockClass(TodoDataService) };
-}
 
 describe('TodoEntryComponent', () => {
   let component: TodoEntryComponent;
