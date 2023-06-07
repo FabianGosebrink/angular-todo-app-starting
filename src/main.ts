@@ -13,13 +13,11 @@ import { AppComponent } from './app/app.component';
 const routes: Routes = [
   {
     path: 'todo',
-    loadChildren: () =>
-      import('./app/todo/todo.module').then((m) => m.TodoModule),
+    loadChildren: () => import('./app/todo').then((m) => m.TODO_ROUTES),
   },
   {
     path: 'about',
-    loadChildren: () =>
-      import('./app/about/about.module').then((m) => m.AboutModule),
+    loadChildren: () => import('./app/about').then((m) => m.ABOUT_ROUTES),
   },
   { path: '', redirectTo: '/todo', pathMatch: 'full' },
 ];
