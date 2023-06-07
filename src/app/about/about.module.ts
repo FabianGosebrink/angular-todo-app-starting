@@ -4,32 +4,32 @@ import { RouterModule } from '@angular/router';
 import { AboutEntryComponent } from './container/about-entry/about-entry.component';
 
 @NgModule({
-  declarations: [AboutEntryComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: AboutEntryComponent,
-      },
-      {
-        path: '',
-        component: AboutEntryComponent,
-      },
-      {
-        path: '',
-        component: AboutEntryComponent,
-      },
-      {
-        path: '',
-        component: AboutEntryComponent,
-        canActivate: [() => false],
-      },
-      {
-        path: '',
-        component: AboutEntryComponent,
-      },
-    ]),
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: AboutEntryComponent,
+            },
+            {
+                path: '',
+                component: AboutEntryComponent,
+            },
+            {
+                path: '',
+                component: AboutEntryComponent,
+            },
+            {
+                path: '',
+                component: AboutEntryComponent,
+                canActivate: [() => false],
+            },
+            {
+                path: '',
+                component: AboutEntryComponent,
+            },
+        ]),
+        AboutEntryComponent,
+    ],
 })
 export class AboutModule {}

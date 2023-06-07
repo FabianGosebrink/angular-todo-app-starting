@@ -10,18 +10,17 @@ describe('TodoEntryComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
-      declarations: [TodoEntryComponent],
-      providers: [
+    imports: [TodoEntryComponent],
+    providers: [
         provideMockStore({
-          initialState: {
-            items: [],
-            loading: false,
-          },
+            initialState: {
+                items: [],
+                loading: false,
+            },
         }),
-      ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    });
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+});
 
     fixture = TestBed.createComponent(TodoEntryComponent);
     component = fixture.componentInstance;

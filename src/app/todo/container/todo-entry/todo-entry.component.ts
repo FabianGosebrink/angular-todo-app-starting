@@ -1,7 +1,10 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Todo } from '../../models/todo';
+import { TodoFormComponent } from '../../presentational/todo-form/todo-form.component';
+import { TodoListComponent } from '../../presentational/todo-list/todo-list.component';
 import { TodoActions } from '../../store/todo.actions';
 import * as TodoSelectors from '../../store/todo.selectors';
 
@@ -9,6 +12,8 @@ import * as TodoSelectors from '../../store/todo.selectors';
   selector: 'app-todo-entry',
   templateUrl: './todo-entry.component.html',
   styleUrls: ['./todo-entry.component.css'],
+  standalone: true,
+  imports: [TodoFormComponent, TodoListComponent, AsyncPipe],
 })
 export class TodoEntryComponent {
   items$: Observable<Todo[]>;

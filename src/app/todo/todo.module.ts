@@ -11,18 +11,18 @@ import { TodoEffects } from './store/todo.effects';
 import { todoReducer } from './store/todo.reducer';
 
 @NgModule({
-  declarations: [TodoEntryComponent, TodoListComponent, TodoFormComponent],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: TodoEntryComponent,
-      },
-    ]),
-    StoreModule.forFeature('todo', todoReducer),
-    EffectsModule.forFeature([TodoEffects]),
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: TodoEntryComponent,
+            },
+        ]),
+        StoreModule.forFeature('todo', todoReducer),
+        EffectsModule.forFeature([TodoEffects]),
+        TodoEntryComponent, TodoListComponent, TodoFormComponent,
+    ],
 })
 export class TodoModule {}
