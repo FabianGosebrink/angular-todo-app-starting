@@ -7,7 +7,7 @@ import { Todo } from '../../models/todo';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent {
-  @Input() items: Todo[] = [];
+  @Input({ required: true }) items: Todo[] = [];
 
   @Output() todoDeleted = new EventEmitter<Todo>();
 
