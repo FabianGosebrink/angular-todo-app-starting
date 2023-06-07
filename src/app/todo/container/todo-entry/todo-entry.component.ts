@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Todo } from '../../models/todo';
-import { TodoDataService } from '../../services/todo-data.service';
+import { TodoActions } from '../../store/todo.actions';
+import { items, loading } from '../../store/todo.selectors';
 
 @Component({
   selector: 'app-todo-entry',
@@ -8,52 +11,52 @@ import { TodoDataService } from '../../services/todo-data.service';
   styleUrls: ['./todo-entry.component.css'],
 })
 export class TodoEntryComponent {
-  items: Todo[] = [];
+  items$: Observable<Todo[]>;
 
-  constructor(private readonly todoDataService: TodoDataService) {}
+  loading$: Observable<boolean>;
+
+  constructor(private readonly store: Store) {}
 
   ngOnInit(): void {
-    this.todoDataService.getItems().subscribe((items) => {
-      this.setSortedItems(items);
-    });
+    this.items$ = this.store.select(items);
+    this.loading$ = this.store.select(loading);
+
+    this.store.dispatch(TodoActions.getAllTodos());
   }
 
   addTodo(value: string): void {
-    this.todoDataService.addTodo(value).subscribe((addedItem) => {
-      const mergedItems = [...this.items, addedItem];
-      this.setSortedItems(mergedItems);
-    });
+    this.store.dispatch(TodoActions.addTodo({ value }));
   }
 
-  deleteTodo(item: Todo): void {
-    this.todoDataService.deleteTodo(item).subscribe(() => {
-      const filteredItems = this.items.filter((x) => x.id !== item.id);
-      this.setSortedItems(filteredItems);
-    });
-  }
+  // deleteTodo(item: Todo): void {
+  //   this.todoDataService.deleteTodo(item).subscribe(() => {
+  //     const filteredItems = this.items.filter((x) => x.id !== item.id);
+  //     this.setSortedItems(filteredItems);
+  //   });
+  // }
 
-  markAsDone(item: Todo): void {
-    this.todoDataService.markAsDone(item).subscribe((updatedItem) => {
-      const filteredItems = this.items.filter((x) => x.id !== updatedItem.id);
-      const mergedItems = [...filteredItems, updatedItem];
-      this.setSortedItems(mergedItems);
-    });
-  }
+  // markAsDone(item: Todo): void {
+  //   this.todoDataService.markAsDone(item).subscribe((updatedItem) => {
+  //     const filteredItems = this.items.filter((x) => x.id !== updatedItem.id);
+  //     const mergedItems = [...filteredItems, updatedItem];
+  //     this.setSortedItems(mergedItems);
+  //   });
+  // }
 
-  private setSortedItems(items: Todo[]): void {
-    const sortedItems = items.sort(this.sortByDone());
-    this.items = [...sortedItems];
-  }
+  // private setSortedItems(items: Todo[]): void {
+  //   const sortedItems = items.sort(this.sortByDone());
+  //   this.items = [...sortedItems];
+  // }
 
-  private sortByDone(): (a: Todo, b: Todo) => number {
-    return (a: Todo, b: Todo) => {
-      if (a.done < b.done) {
-        return -1;
-      }
-      if (a.done > b.done) {
-        return 1;
-      }
-      return 0;
-    };
-  }
+  // private sortByDone(): (a: Todo, b: Todo) => number {
+  //   return (a: Todo, b: Todo) => {
+  //     if (a.done < b.done) {
+  //       return -1;
+  //     }
+  //     if (a.done > b.done) {
+  //       return 1;
+  //     }
+  //     return 0;
+  //   };
+  // }
 }

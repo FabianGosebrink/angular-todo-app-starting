@@ -8,11 +8,7 @@
 
             <app-todo-form (todoAdded)="addTodo($event)"></app-todo-form>
 
-            <app-todo-list
-              [items]="items"
-              (todoDeleted)="deleteTodo($event)"
-              (todoMarkedAsDone)="markAsDone($event)"
-            ></app-todo-list>
+            <app-todo-list [items]="items$ | async"></app-todo-list>
           </div>
         </div>
       </div>
