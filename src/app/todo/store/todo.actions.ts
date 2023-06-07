@@ -9,5 +9,11 @@ export const TodoActions = createActionGroup({
 
     'Get All Todos': emptyProps(),
     'Get All Todos Finished': props<{ todos: Todo[] }>(),
+
+    'Set As Done': props<{ todo: Todo }>(),
+    'Set As Done Finished': props<{ todo: Todo }>(),
+
+    'Delete Todo': props<{ todo: Todo }>(),
+    'Delete Todo Finished': props<{ todo: Todo }>(),
   },
 });

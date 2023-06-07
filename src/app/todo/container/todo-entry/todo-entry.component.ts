@@ -12,7 +12,6 @@ import { items, loading } from '../../store/todo.selectors';
 })
 export class TodoEntryComponent {
   items$: Observable<Todo[]>;
-
   loading$: Observable<boolean>;
 
   constructor(private readonly store: Store) {}
@@ -28,35 +27,11 @@ export class TodoEntryComponent {
     this.store.dispatch(TodoActions.addTodo({ value }));
   }
 
-  // deleteTodo(item: Todo): void {
-  //   this.todoDataService.deleteTodo(item).subscribe(() => {
-  //     const filteredItems = this.items.filter((x) => x.id !== item.id);
-  //     this.setSortedItems(filteredItems);
-  //   });
-  // }
+  deleteTodo(todo: Todo): void {
+    this.store.dispatch(TodoActions.deleteTodo({ todo }));
+  }
 
-  // markAsDone(item: Todo): void {
-  //   this.todoDataService.markAsDone(item).subscribe((updatedItem) => {
-  //     const filteredItems = this.items.filter((x) => x.id !== updatedItem.id);
-  //     const mergedItems = [...filteredItems, updatedItem];
-  //     this.setSortedItems(mergedItems);
-  //   });
-  // }
-
-  // private setSortedItems(items: Todo[]): void {
-  //   const sortedItems = items.sort(this.sortByDone());
-  //   this.items = [...sortedItems];
-  // }
-
-  // private sortByDone(): (a: Todo, b: Todo) => number {
-  //   return (a: Todo, b: Todo) => {
-  //     if (a.done < b.done) {
-  //       return -1;
-  //     }
-  //     if (a.done > b.done) {
-  //       return 1;
-  //     }
-  //     return 0;
-  //   };
-  // }
+  markAsDone(todo: Todo): void {
+    this.store.dispatch(TodoActions.setAsDone({ todo }));
+  }
 }

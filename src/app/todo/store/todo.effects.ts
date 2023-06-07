@@ -32,4 +32,32 @@ export class TodoEffects {
       })
     )
   );
+
+  markAsDone$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.setAsDone),
+      concatMap(({ todo }) => {
+        const toSend = { ...todo, done: !todo.done };
+
+        return this.todoDataService
+          .markAsDone(toSend)
+          .pipe(
+            map((updatedTodo) =>
+              TodoActions.setAsDoneFinished({ todo: updatedTodo })
+            )
+          );
+      })
+    )
+  );
+
+  deleteTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.deleteTodo),
+      concatMap(({ todo }) =>
+        this.todoDataService
+          .deleteTodo(todo)
+          .pipe(map((_) => TodoActions.deleteTodoFinished({ todo })))
+      )
+    )
+  );
 }

@@ -21,7 +21,6 @@ export class TodoDataService {
   }
 
   markAsDone(item: Todo): Observable<Todo> {
-    item.done = !item.done;
     return this.http.put<Todo>(`${environment.apiUrl}todos/${item.id}`, item);
   }
 }
