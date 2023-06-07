@@ -6,6 +6,10 @@ import { mockClass } from '../../../../testing/auto-mock';
 import { TodoDataService } from '../../services/todo-data.service';
 import { TodoEntryComponent } from './todo-entry.component';
 
+function provideMock(service: any) {
+  return { provide: TodoDataService, useClass: mockClass(TodoDataService) };
+}
+
 describe('TodoEntryComponent', () => {
   let component: TodoEntryComponent;
   let fixture: ComponentFixture<TodoEntryComponent>;
@@ -15,9 +19,7 @@ describe('TodoEntryComponent', () => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [TodoEntryComponent],
-      providers: [
-        { provide: TodoDataService, useClass: mockClass(TodoDataService) },
-      ],
+      providers: [provideMock(TodoDataService)],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
 
@@ -33,5 +35,18 @@ describe('TodoEntryComponent', () => {
     fixture.detectChanges();
 
     expect(component).toBeTruthy();
+  });
+
+  describe('addTodo', () => {
+    it('should call service and pass item', () => {
+      // arrange
+      const spy = spyOn(service, 'addTodo').and.returnValue(of(null));
+
+      // act
+      component.addTodo('my value');
+
+      // assert
+      expect(spy).toHaveBeenCalledWith('my value');
+    });
   });
 });
