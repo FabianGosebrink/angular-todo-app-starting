@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { HttpService } from '../../services/http.service';
 import { Todo } from '../models/todo';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Todo } from '../models/todo';
 export class TodoService {
   private url = `${environment.apiUrl}todos`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpService) {}
 
   getItems() {
     return this.http.get<Todo[]>(this.url);
