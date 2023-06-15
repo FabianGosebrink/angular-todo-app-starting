@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Todo } from './todo';
+import { environment } from '../../../../environments/environment';
+import { Todo } from '../../../todo';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'app-todo-main',
+  templateUrl: './todo-main.component.html',
+  styleUrls: ['./todo-main.component.css'],
 })
-export class AppComponent {
+export class TodoMainComponent {
   title = 'app';
   items: Todo[] = [];
 

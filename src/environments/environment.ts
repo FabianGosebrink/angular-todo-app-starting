@@ -1,3 +1,5 @@
-export const environment = {  production: true,
+export const environment = {
+  production: true,
   apiUrl: `https://sampletodobackend.azurewebsites.net/api/v1/`,
-  serverUrl: `https://sampletodobackend.azurewebsites.net/`};
+  serverUrl: `https://sampletodobackend.azurewebsites.net/`,
+};
