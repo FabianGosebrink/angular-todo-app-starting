@@ -3,7 +3,6 @@ import {
   ComponentFixture,
   TestBed,
   fakeAsync,
-  tick,
   waitForAsync,
 } from '@angular/core/testing';
 import { of } from 'rxjs';
@@ -34,13 +33,5 @@ describe('TodoMainComponent', () => {
 
   it('should create', fakeAsync(() => {
     expect(component).toBeTruthy();
-
-    // check if http call was NOT fired
-    tick(250);
-    //check if http call was still NOT fired
-
-    tick(150);
-
-    // check if http call WAS fired
   }));
 });
