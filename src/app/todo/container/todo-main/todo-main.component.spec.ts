@@ -6,6 +6,7 @@ import {
   tick,
   waitForAsync,
 } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { autoMock } from '../../../testing/auto-mock';
 import { TodoService } from '../../services/todo.service';
 import { TodoMainComponent } from './todo-main.component';
@@ -26,7 +27,7 @@ describe('TodoMainComponent', () => {
     component = fixture.componentInstance;
 
     service = TestBed.inject(TodoService);
-    spyOn(service, 'getItems').and.returnValue([]);
+    spyOn(service, 'getItems').and.returnValue(of([]));
 
     fixture.detectChanges();
   }));
