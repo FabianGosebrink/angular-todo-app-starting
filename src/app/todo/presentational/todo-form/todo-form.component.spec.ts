@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 import { TodoFormComponent } from './todo-form.component';
 
 describe('TodoFormComponent', () => {
@@ -8,8 +7,8 @@ describe('TodoFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [ReactiveFormsModule, TodoFormComponent],
-});
+      imports: [TodoFormComponent],
+    });
     fixture = TestBed.createComponent(TodoFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
