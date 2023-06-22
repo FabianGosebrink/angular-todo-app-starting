@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpService } from '../../services/http.service';
 import { Todo } from '../models/todo';
@@ -11,7 +12,7 @@ export class TodoService {
 
   constructor(private http: HttpService) {}
 
-  getItems() {
+  getItems(): Observable<Todo[]> {
     return this.http.get<Todo[]>(this.url);
   }
 
