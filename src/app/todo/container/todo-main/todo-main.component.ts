@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { Todo } from '../../models/todo';
-import { TodoService } from '../../services/todo.service';
-import { TodoListComponent } from '../../presentational/todo-list/todo-list.component';
 import { TodoFormComponent } from '../../presentational/todo-form/todo-form.component';
+import { TodoListComponent } from '../../presentational/todo-list/todo-list.component';
+import { TodoService } from '../../services/todo.service';
 
 @Component({
-    selector: 'app-todo-main',
-    templateUrl: './todo-main.component.html',
-    styleUrls: ['./todo-main.component.css'],
-    standalone: true,
-    imports: [TodoFormComponent, TodoListComponent],
+  selector: 'app-todo-main',
+  templateUrl: './todo-main.component.html',
+  styleUrls: ['./todo-main.component.css'],
+  standalone: true,
+  imports: [TodoFormComponent, TodoListComponent],
 })
 export class TodoMainComponent {
   title = 'app';
