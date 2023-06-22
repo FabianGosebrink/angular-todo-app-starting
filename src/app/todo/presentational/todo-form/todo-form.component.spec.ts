@@ -8,9 +8,8 @@ describe('TodoFormComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TodoFormComponent],
-      imports: [ReactiveFormsModule],
-    });
+    imports: [ReactiveFormsModule, TodoFormComponent],
+});
     fixture = TestBed.createComponent(TodoFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

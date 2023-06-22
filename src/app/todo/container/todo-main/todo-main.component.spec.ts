@@ -17,10 +17,10 @@ describe('TodoMainComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TodoMainComponent],
-      providers: [autoMock(TodoService)],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    });
+    imports: [TodoMainComponent],
+    providers: [autoMock(TodoService)],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+});
 
     fixture = TestBed.createComponent(TodoMainComponent);
     component = fixture.componentInstance;

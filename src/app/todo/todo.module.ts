@@ -7,16 +7,16 @@ import { TodoFormComponent } from './presentational/todo-form/todo-form.componen
 import { TodoListComponent } from './presentational/todo-list/todo-list.component';
 
 @NgModule({
-  declarations: [TodoFormComponent, TodoListComponent, TodoMainComponent],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: TodoMainComponent,
-      },
-    ]),
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: TodoMainComponent,
+            },
+        ]),
+        TodoFormComponent, TodoListComponent, TodoMainComponent,
+    ],
 })
 export class TodoModule {}
