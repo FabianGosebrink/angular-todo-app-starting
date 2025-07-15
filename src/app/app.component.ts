@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { Todo } from './todo';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    standalone: false
+    imports: [ReactiveFormsModule]
 })
 export class AppComponent {
   title = 'app';
