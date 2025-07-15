@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Todo } from './todo';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -10,16 +10,12 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
     styleUrls: ['./app.component.css'],
     imports: [ReactiveFormsModule]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  private readonly http = inject(HttpClient);
+
   title = 'app';
   items: Todo[] = [];
   form: FormGroup;
-
-  constructor(
-    private readonly http: HttpClient
-  ) {
-
-  }
 
   ngOnInit(): void {
     this.http.get<Todo[]>(`${environment.apiUrl}todos/`).subscribe((items) => {
