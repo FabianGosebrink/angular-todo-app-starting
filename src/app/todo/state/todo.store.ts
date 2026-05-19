@@ -35,7 +35,62 @@ export const TodoStore = signalStore(
           })
         )
       })
-    )
+    ),
+    addTodo: rxMethod<string>(
+      exhaustMap((value) => {
+        patchState(store, { loading: true });
+
+        return todoService.addTodo(value).pipe(
+          tapResponse({
+            next: (item) =>
+              patchState(store, { items: [...store.items(), item] }),
+            error: console.error,
+            finalize: () => patchState(store, { loading: false }),
+          }),
+        );
+      }),
+    ),
+    moveToDone: rxMethod<Todo>(
+      exhaustMap((todo) => {
+        patchState(store, { loading: true });
+
+        const toSend = { ...todo, done: !todo.done };
+
+        return todoService.markAsDone(toSend).pipe(
+          tapResponse({
+            next: (updatedTodo) => {
+              const allItems = [...store.items()];
+              const index = allItems.findIndex((x) => x.id === todo.id);
+
+              allItems[index] = updatedTodo;
+
+              patchState(store, {
+                items: allItems,
+              });
+            },
+            error: console.error,
+            finalize: () => patchState(store, { loading: false }),
+          }),
+        );
+      }),
+    ),
+    deleteTodo: rxMethod<Todo>(
+      exhaustMap((todo) => {
+        patchState(store, { loading: true });
+
+        return todoService.deleteTodo(todo).pipe(
+          tapResponse({
+            next: () => {
+              patchState(store, {
+                items: [...store.items().filter((x) => x.id !== todo.id)],
+              });
+            },
+            error: console.error,
+            finalize: () => patchState(store, { loading: false }),
+          }),
+        );
+      }),
+    ),
   })),
   withHooks({
     onInit({ loadAllTodos }) {

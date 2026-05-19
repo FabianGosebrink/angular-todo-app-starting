@@ -8,9 +8,11 @@
 
             <h6 class="mb-3">Awesome Todo List ({{ store.sortedItems().length }})</h6>
 
-            <app-todo-form/>
+            <app-todo-form (todoAdded)="store.addTodo($event)"/>
 
             <app-todo-list
+              (markedAsDone)="store.moveToDone($event)"
+              (todoDeleted)="store.deleteTodo($event)"
               [items]="store.sortedItems()"/>
 
           </div>
