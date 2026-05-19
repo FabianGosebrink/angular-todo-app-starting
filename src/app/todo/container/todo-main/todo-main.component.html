@@ -1,24 +1,16 @@
-<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-
-        <div class="card" style="border-radius: 15px;">
-          <div class="card-body p-5">
-
-            <h6 class="mb-3">Awesome Todo List ({{ store.sortedItems().length }})</h6>
-
-            <app-todo-form (todoAdded)="store.addTodo($event)"/>
-
-            <app-todo-list
-              (markedAsDone)="store.moveToDone($event)"
-              (todoDeleted)="store.deleteTodo($event)"
-              [items]="store.sortedItems()"/>
-
-          </div>
-        </div>
-
+<section class="min-h-screen px-4 py-10 sm:px-6">
+  <div class="mx-auto max-w-2xl">
+    <div class="bg-white px-6 py-8 shadow-[0_12px_30px_rgba(15,23,42,0.12)] sm:px-12">
+      <div class="mb-8">
+        <h1 class="text-4xl font-extrabold uppercase tracking-[0.06em] text-slate-800">To-Do List</h1>
       </div>
+
+      <app-todo-form (todoAdded)="store.addTodo($event)" />
+
+      <app-todo-list
+        (markedAsDone)="store.moveToDone($event)"
+        (todoDeleted)="store.deleteTodo($event)"
+        [items]="store.sortedItems()" />
     </div>
   </div>
 </section>

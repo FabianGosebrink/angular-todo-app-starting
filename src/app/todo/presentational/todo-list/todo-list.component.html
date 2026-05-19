@@ -1,15 +1,30 @@
-<ul class="list-group mb-0">
-  @for (item of items(); track item) {
-    <li
-      class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
-      <div class="d-flex align-items-center">
-        <input (click)="markedAsDone.emit(item)" [checked]="item.done" aria-label="..." class="form-check-input me-2"
-               type="checkbox"
-               value=""/>
-        {{ item.value }}
-      </div>
-      <button (click)="todoDeleted.emit(item)" class="btn btn-danger btn-sm" type="button">Delete</button>
-    </li>
-  }
-
-</ul>
+@if (items().length) {
+  <ul>
+    @for (item of items(); track item) {
+      <li class="flex items-center justify-between gap-4 border-b border-slate-200 py-5">
+        <label class="flex min-w-0 flex-1 items-center gap-4">
+          <input
+            (click)="markedAsDone.emit(item)"
+            [checked]="item.done"
+            type="checkbox"
+            class="h-4 w-4 rounded-[2px] border-slate-400 text-teal-500 focus:ring-teal-500"
+          />
+          <span class="truncate text-[2rem] text-slate-800" [class.line-through]="item.done" [class.text-slate-400]="item.done">
+            {{ item.value }}
+          </span>
+        </label>
+        <button
+          (click)="todoDeleted.emit(item)"
+          type="button"
+          class="text-sm text-slate-400 transition hover:text-rose-500"
+        >
+          Delete
+        </button>
+      </li>
+    }
+  </ul>
+} @else {
+  <div class="border-b border-slate-200 py-8 text-center">
+    <p class="text-lg text-slate-400">No tasks yet.</p>
+  </div>
+}

@@ -1,7 +1,22 @@
-<form (ngSubmit)="addTodo()" [formGroup]="form"
-      class="d-flex justify-content-center align-items-center mb-4">
-  <div class="form-outline flex-fill">
-    <input class="form-control form-control-lg" formControlName="todoValue" id="form1" type="text"/>
+<form
+  (ngSubmit)="addTodo()"
+  [formGroup]="form"
+  class="mb-5"
+>
+  <div class="grid grid-cols-[1fr_auto] items-center gap-4 border-b-2 border-teal-500 pb-2">
+    <input
+      id="todoValue"
+      formControlName="todoValue"
+      type="text"
+      placeholder="Add a task"
+      class="w-full bg-transparent px-2 py-2 text-2xl text-slate-700 outline-none placeholder:text-slate-400"
+    />
+    <button
+      [disabled]="form.invalid"
+      type="submit"
+      class="bg-teal-500 px-4 py-2 text-xl text-white transition hover:bg-teal-600 disabled:cursor-not-allowed disabled:bg-slate-300"
+    >
+      Add
+    </button>
   </div>
-  <button [disabled]="form.invalid" class="btn btn-primary btn-lg ms-2" type="submit">Add</button>
 </form>
