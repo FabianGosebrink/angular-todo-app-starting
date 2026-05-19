@@ -1,21 +1,22 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Todo } from './todo';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { environment } from "../environments/environment";
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    imports: [ReactiveFormsModule]
+  selector: 'app-root',
+  templateUrl: './app.html',
+  imports: [
+    ReactiveFormsModule
+  ],
+  styleUrl: './app.scss'
 })
-export class AppComponent implements OnInit {
-  private readonly http = inject(HttpClient);
-
-  title = 'app';
+export class App {
   items: Todo[] = [];
   form: FormGroup;
+  protected readonly title = signal('angular-todo-app-starting-2');
+  private readonly http = inject(HttpClient);
 
   ngOnInit(): void {
     this.http.get<Todo[]>(`${environment.apiUrl}todos/`).subscribe((items) => {
@@ -42,11 +43,11 @@ export class AppComponent implements OnInit {
 
   deleteTodo(item: Todo): void {
     this.http
-    .delete(`${environment.apiUrl}todos/${item.id}`)
-    .subscribe(() => {
-      const filteredItems = this.items.filter((x) => x.id !== item.id);
-      this.setSortedItems(filteredItems);
-    });
+      .delete(`${environment.apiUrl}todos/${item.id}`)
+      .subscribe(() => {
+        const filteredItems = this.items.filter((x) => x.id !== item.id);
+        this.setSortedItems(filteredItems);
+      });
   }
 
   markAsDone(item: Todo): void {

@@ -1,0 +1,59 @@
+<section class="min-h-screen px-4 py-10 sm:px-6">
+  <div class="mx-auto max-w-2xl">
+    <div class="bg-white px-6 py-8 shadow-[0_12px_30px_rgba(15,23,42,0.12)] sm:px-12">
+      <div class="mb-8">
+        <h1 class="text-4xl font-extrabold uppercase tracking-[0.06em] text-slate-800">To-Do List</h1>
+      </div>
+
+      <form (ngSubmit)="addTodo()" [formGroup]="form" class="mb-5">
+        <div class="grid grid-cols-[1fr_auto] items-center gap-4 border-b-2 border-teal-500 pb-2">
+          <input
+            id="todoValue"
+            formControlName="todoValue"
+            type="text"
+            placeholder="Add a task"
+            class="w-full bg-transparent px-2 py-2 text-2xl text-slate-700 outline-none placeholder:text-slate-400"
+          />
+          <button
+            [disabled]="form.invalid"
+            type="submit"
+            class="bg-teal-500 px-4 py-2 text-xl text-white transition hover:bg-teal-600 disabled:cursor-not-allowed disabled:bg-slate-300"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+
+      @if (items.length) {
+        <ul>
+          @for (item of items; track item) {
+            <li class="flex items-center justify-between gap-4 border-b border-slate-200 py-5">
+              <label class="flex min-w-0 flex-1 items-center gap-4">
+                <input
+                  (click)="markAsDone(item)"
+                  [checked]="item.done"
+                  type="checkbox"
+                  class="h-4 w-4 rounded-[2px] border-slate-400 text-teal-500 focus:ring-teal-500"
+                />
+                <span class="truncate text-[2rem] text-slate-800" [class.line-through]="item.done" [class.text-slate-400]="item.done">
+                  {{ item.value }}
+                </span>
+              </label>
+              <button
+                (click)="deleteTodo(item)"
+                type="button"
+                class="text-sm text-slate-400 transition hover:text-rose-500"
+              >
+                Delete
+              </button>
+            </li>
+          }
+        </ul>
+      } @else {
+        <div class="border-b border-slate-200 py-8 text-center">
+          <p class="text-lg text-slate-400">No tasks yet.</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
