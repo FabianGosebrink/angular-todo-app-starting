@@ -1,0 +1,7 @@
+<form (ngSubmit)="addTodo()" [formGroup]="form"
+      class="d-flex justify-content-center align-items-center mb-4">
+  <div class="form-outline flex-fill">
+    <input class="form-control form-control-lg" formControlName="todoValue" id="form1" type="text"/>
+  </div>
+  <button [disabled]="form.invalid" class="btn btn-primary btn-lg ms-2" type="submit">Add</button>
+</form>
