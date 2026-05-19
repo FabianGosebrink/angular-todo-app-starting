@@ -12,16 +12,16 @@ export class TodosService {
     return this.http.get<Todo[]>(this.#url);
   }
 
-  addTodo(todoToAdd: string): void {
-    this.http.post<Todo>(this.#url, { value: todoToAdd });
+  addTodo(todoToAdd: string) {
+    return this.http.post<Todo>(this.#url, { value: todoToAdd });
   }
 
-  deleteTodo(item: Todo): void {
-    this.http.delete(`${this.#url}/${item.id}`)
+  deleteTodo(item: Todo) {
+    return this.http.delete(`${this.#url}/${item.id}`)
   }
 
-  markAsDone(item: Todo): void {
-    this.http.put<Todo>(`${this.#url}/${item.id}`, item)
+  markAsDone(item: Todo) {
+    return this.http.put<Todo>(`${this.#url}/${item.id}`, item)
   }
 }
 
