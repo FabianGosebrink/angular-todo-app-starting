@@ -1,10 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TodoMainComponent } from './todo/container/todo-main/todo-main.component';
 
 @Component({
   selector: 'app-root',
-  imports: [TodoMainComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
